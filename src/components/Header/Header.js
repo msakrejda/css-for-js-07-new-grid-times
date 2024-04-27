@@ -10,7 +10,7 @@ import Button from '../Button';
 
 const Header = () => {
   return (
-    <header>
+    <Wrapper>
       <SuperHeader>
         <Row>
           <ActionGroup>
@@ -31,14 +31,22 @@ const Header = () => {
       <MainHeader>
         <Logo />
       </MainHeader>
-    </header>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  @media ${QUERIES.tabletAndUp} (
+    display: flex;
+  )
+`;
 
 const SuperHeader = styled.div`
   padding: 16px 0;
   background: var(--color-gray-900);
   color: white;
+
+  
 `;
 
 const Row = styled(MaxWidthWrapper)`
