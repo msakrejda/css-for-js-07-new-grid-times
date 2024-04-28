@@ -11,52 +11,67 @@ import Button from '../Button';
 const Header = () => {
   return (
     <Wrapper>
-      <SuperHeader>
-        <Row>
-          <ActionGroup>
-            <button>
-              <Search size={24} />
-            </button>
-            <button>
-              <Menu size={24} />
-            </button>
-          </ActionGroup>
-          <ActionGroup>
-            <button>
-              <User size={24} />
-            </button>
-          </ActionGroup>
-        </Row>
-      </SuperHeader>
-      <MainHeader>
-        <Logo />
-      </MainHeader>
-      <SubscribeBlurb>
-        <Button>Subscribe</Button>
-        <span>Already a subscriber?</span>
-      </SubscribeBlurb>
+      <MobileHeader>
+        <SuperHeader>
+          <Row>
+            <SearchAndMenuIcons />
+            <ActionGroup>
+              <UserPreferencesButton>
+                <User size={24} />
+              </UserPreferencesButton>
+            </ActionGroup>
+          </Row>
+        </SuperHeader>
+        <MainHeader>
+          <Logo />
+        </MainHeader>
+      </MobileHeader>
+      <LaptopAndUpHeader>
+        <MainHeader>
+          <SearchAndMenuIcons />
+          <Logo />
+          <SubscribeBlurb>
+            <Button>Subscribe</Button>
+            <span>Already a subscriber?</span>
+          </SubscribeBlurb>
+        </MainHeader>
+      </LaptopAndUpHeader>
     </Wrapper>
   );
 };
 
-const Wrapper = styled(MaxWidthWrapper)`
+const MobileHeader = styled.div`
+  display: contents;
   @media ${QUERIES.laptopAndUp} {
-    display: flex;
-    grid-template-columns: min-content max-content min-content;
-    align-items: center;
-    justify-content: space-between;
+    display: none;
   }
 `;
 
-const SubscribeBlurb = styled.div`
+const LaptopAndUpHeader = styled.div`
   display: none;
-  span {
-    text-decoration: underline;
-    font-style: italic;
-  }
-  text-align: center;
   @media ${QUERIES.laptopAndUp} {
-    display: block;
+    display: contents;
+  }
+`;
+
+const SearchAndMenuIcons = () => {
+  return (
+    <ActionGroup>
+      <button>
+        <Search size={24} />
+      </button>
+      <button>
+        <Menu size={24} />
+      </button>
+    </ActionGroup>
+  )
+}
+
+const Wrapper = styled.div`
+  @media ${QUERIES.laptopAndUp} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 `;
 
@@ -64,14 +79,9 @@ const SuperHeader = styled.div`
   padding: 16px 0;
   background: var(--color-gray-900);
   color: white;
-
-  @media ${QUERIES.laptopAndUp} {
-    background: var(--color-gray-100);
-    color: var(--color-gray-900);
-  }
 `;
 
-const Row = styled.div`
+const Row = styled(MaxWidthWrapper)`
   display: flex;
   justify-content: space-between;
 `;
@@ -79,12 +89,6 @@ const Row = styled.div`
 const ActionGroup = styled.div`
   display: flex;
   gap: 24px;
-
-  &:last-child {
-    @media ${QUERIES.laptopAndUp} {
-      display: none;
-    }
-  }
 
   /*
     FIX: Remove the inline spacing that comes with
@@ -95,16 +99,42 @@ const ActionGroup = styled.div`
   }
 `;
 
-const MainHeader = styled.div`
-  display: flex;
+const UserPreferencesButton = styled.button`
+  @media ${QUERIES.laptopAndUp} {
+    display: none;
+  }
+`;
+
+const SubscribeBlurb = styled.div`
+  display: none;
+  span {
+    text-decoration: underline;
+    font-style: italic;
+  }
+  text-align: center;
+  align-self: flex-end;
+
+  @media ${QUERIES.laptopAndUp} {
+    display: block;
+  }
+`;
+
+const MainHeader = styled(MaxWidthWrapper)`
+  display: grid;
   align-items: center;
   justify-content: center;
+  grid-template-columns: 1fr;
+
   margin-top: 32px;
   margin-bottom: 48px;
 
   @media ${QUERIES.tabletAndUp} {
-    margin-bottom: 64px;
+    width: 100%;
+
+    grid-template-columns: min-content max-content min-content;
     justify-content: space-between;
+
+    margin-bottom: 64px;
   }
 `;
 
