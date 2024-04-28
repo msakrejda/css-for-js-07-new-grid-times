@@ -129,12 +129,14 @@ const MainHeader = styled(MaxWidthWrapper)`
   margin-bottom: 48px;
 
   @media ${QUERIES.tabletAndUp} {
+    margin-bottom: 64px;
+  }
+
+  @media ${QUERIES.laptopAndUp} {
     width: 100%;
 
     grid-template-columns: min-content max-content min-content;
     justify-content: space-between;
-
-    margin-bottom: 64px;
   }
 `;
 
