@@ -12,6 +12,7 @@ import MainStory from '../MainStory';
 import SecondaryStory from '../SecondaryStory';
 import OpinionStory from '../OpinionStory';
 import Advertisement from '../Advertisement';
+import { QUERIES } from '../../constants';
 
 const MainStoryGrid = () => {
   return (
@@ -53,19 +54,47 @@ const Wrapper = styled.div`
     'advertisement';
   gap: 48px;
   margin-bottom: 48px;
+
+  @media ${QUERIES.tabletAndUp} {
+    grid-template-areas:
+      'main-story secondary-stories'
+      'advertisement advertisement'
+      'opinion-stories opinion-stories';
+      grid-template-columns: 3fr 1fr;
+  }
 `;
 
 const MainStorySection = styled.section`
   grid-area: main-story;
+  position: relative;
+
+  ::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -24px;
+    width: 1px;
+    height: 100%;
+    background-color: var(--color-gray-300);
+  }
 `;
 
 const SecondaryStorySection = styled.section`
   grid-area: secondary-stories;
 `;
 
+
 const StoryList = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 20px;
+
+  a:not(:last-child)::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background-color: var(--color-gray-300);
+  }
 `;
 
 const OpinionSection = styled.section`
