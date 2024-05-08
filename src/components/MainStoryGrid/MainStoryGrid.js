@@ -85,8 +85,8 @@ const SecondaryStorySection = styled.section`
 
 
 const StoryList = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 20px;
 
   a:not(:last-child)::after {
@@ -94,6 +94,13 @@ const StoryList = styled.div`
     display: block;
     height: 1px;
     background-color: var(--color-gray-300);
+  }
+
+  @media ${QUERIES.tabletOnly} {
+    grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
+    a:not(:last-child)::after {
+      display: none;
+    }
   }
 `;
 
