@@ -4,6 +4,7 @@ import styled from 'styled-components/macro';
 import MaxWidthWrapper from '../MaxWidthWrapper';
 
 import VisuallyHidden from '../VisuallyHidden';
+import { QUERIES } from '../../constants';
 
 const Footer = () => {
   return (
@@ -144,6 +145,16 @@ const TopRow = styled.div`
   font-size: 0.875rem;
   border-bottom: 1px solid var(--color-gray-700);
   padding: 24px 0;
+
+  @media ${QUERIES.tabletAndUp} {
+    flex-direction: row;
+    justify-content: center;
+    gap: 48px;
+  }
+
+  @media ${QUERIES.laptopAndUp} {
+    justify-content: flex-end;
+  }
 `;
 
 const Social = styled.div`
@@ -170,6 +181,20 @@ const MainNavArea = styled.div`
   gap: 32px;
   padding: 32px 0 48px;
   text-align: center;
+
+  @media ${QUERIES.tabletAndUp} {
+    text-align: unset;
+    
+    flex-wrap: wrap;
+    flex-direction: row;    
+    justify-content: space-between;
+
+    >* {
+      flex-basis: 0;
+      flex-grow: 1;
+      min-width: 200px;
+    }
+  }
 `;
 
 const MainNavHeading = styled.h2`
