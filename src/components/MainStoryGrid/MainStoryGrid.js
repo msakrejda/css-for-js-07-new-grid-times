@@ -31,11 +31,11 @@ const MainStoryGrid = () => {
 
       <OpinionSection>
         <SectionTitle>Opinion</SectionTitle>
-        <StoryList>
+        <OpinionStoryList>
           {OPINION_STORIES.map((story, index) => (
             <OpinionStory key={story.id} {...story} />
           ))}
-        </StoryList>
+        </OpinionStoryList>
       </OpinionSection>
 
       <AdvertisementSection>
@@ -60,7 +60,14 @@ const Wrapper = styled.div`
       'main-story secondary-stories'
       'advertisement advertisement'
       'opinion-stories opinion-stories';
-      grid-template-columns: 3fr 1fr;
+    grid-template-columns: 3fr 1fr;
+  }
+
+  @media ${QUERIES.laptopAndUp} {
+    grid-template-areas:
+      'main-story secondary-stories opinion-stories'
+      'main-story advertisement advertisement';
+    grid-template-columns: 5fr 4fr 3fr;
   }
 `;
 
@@ -81,6 +88,19 @@ const MainStorySection = styled.section`
 
 const SecondaryStorySection = styled.section`
   grid-area: secondary-stories;
+  position: relative;
+
+  @media ${QUERIES.laptopAndUp} {
+    ::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -24px;
+      width: 1px;
+      height: 100%;
+      background-color: var(--color-gray-300);
+    }
+  }
 `;
 
 
@@ -95,7 +115,9 @@ const StoryList = styled.div`
     height: 1px;
     background-color: var(--color-gray-300);
   }
+`;
 
+const OpinionStoryList = styled(StoryList)`
   @media ${QUERIES.tabletOnly} {
     grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
     a:not(:last-child)::after {
@@ -110,6 +132,19 @@ const OpinionSection = styled.section`
 
 const AdvertisementSection = styled.section`
   grid-area: advertisement;
+  position: relative;
+
+  @media ${QUERIES.laptopAndUp} {
+    ::before {
+      content: '';
+      position: absolute;
+      top: -24px;
+      left: 0px;
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-gray-300);
+    }
+  }
 `;
 
 export default MainStoryGrid;
